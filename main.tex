@@ -1,0 +1,320 @@
+\documentclass{ecuthesis}
+\usepackage{amsmath, amssymb, amscd}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\usepackage{amsthm}
+\usepackage[all]{xy}
+\usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{listings}
+
+\usepackage{bchart}
+
+\makeatletter
+\patchcmd{\l@chapter}{#1}{\MakeUppercase{#1}}{}{}
+\makeatother
+
+\CompileMatrices
+
+\renewcommand\floatpagefraction{.9}
+\renewcommand\topfraction{.9}
+\renewcommand\bottomfraction{.9}
+\renewcommand\textfraction{.1}
+\setcounter{totalnumber}{50}
+\setcounter{topnumber}{50}
+\setcounter{bottomnumber}{50}
+
+\newtheorem{thm}{Theorem}[section] 
+\newtheorem{cor}[thm]{Corollary}
+\newtheorem{lem}[thm]{Lemma}
+
+\newcommand{\degrees}[0]{\ensuremath{^\circ}}
+\newcommand{\dgd}[0]{Directional Graph Drawing}
+
+\title{Software Engineering as a Social Process: A Study of Research Triangle Park}
+\author{Lindsey Lanier}
+\department{Computer Science}
+\degree{Master of Science}
+\program{Software Engineering}
+\date{March 6, 2016}
+
+\advisor{Mark Hills, PhD}
+\member{Nasseh Tabrizi, PhD}
+\member{Junhua Ding, PhD}
+\departmentchair{Venkat Gudivada, PhD}
+\dean{Paul J. Gemperline, PhD}
+
+\thesismonth{April}
+\thesisyear{2016}
+
+\begin{document}
+
+
+\begin{abstract}
+\noindent Powered by increased capabilities of online collaboration tools, open source software development has become a critical component of the development landscape for both individual developers and for organizations. However, very little is known about how developers and organizations in regions with a heavy information technology presence participate in the open source community. This research uses public data from GitHub, a popular online open source collaboration tool, to gain a better understanding of open source software development activity in one such region, the Research Triangle Park in North Carolina. Research Triangle Park is one of the largest research parks in the world, and the largest in the United States. Within the 7,000 acre park, there are currently more than 200 companies employing around 50,000 people in a number of fields of expertise, with information technology playing a large role. To explore how developers and organizations in this region are involved in open source development, we use data mined from GitHub to aggregate information and trends about the developers and organizations themselves, their open source projects, and their use of the social media features within GitHub. The data collection tools and techniques created to enable this research are designed to easily enable similar studies to be performed for other geographical regions.
+\end{abstract}
+
+\coversheet
+
+\maketitle
+\makecopyright
+\makesignature
+\tableofcontents
+\listoftables
+\listoffigures
+
+\chapters
+
+\include{Chapter-1}
+\include{Chapter-2}
+\include{Chapter-3}
+\include{Chapter-4}
+\include{Chapter-5}
+\include{Chapter-6}
+\include{Chapter-7}
+
+
+\bibliographystyle{IEEEtran}
+\bibliography{cited}
+
+\coversheet
+
+\end{document}
+
+
+% MH: PRIOR CONTENTS HERE
+% \documentclass[11pt,          % font size: 11pt or 12pt
+%                ms,           % degree:    ms or phd
+%                doublespacing % spacing: onehalfspacing or doublespacing
+%                ]{ncsuthesis}
+
+% %%----------------------------------------------------------------------------%%
+% %%------------------------------ Import Packages -----------------------------%%
+% %%----------------------------------------------------------------------------%%
+% \usepackage{afterpage}
+% \usepackage{ragged2e}
+% \usepackage{booktabs}  % professionally typeset tables
+% \usepackage{amsmath}%,amssymb,amsfonts}
+% \usepackage{textcomp}  % better copyright sign, among other things
+% %\usepackage{xcolor}
+% \usepackage{lipsum}    % filler text
+% \usepackage{subfig}    % composite figures
+% \usepackage{listings}
+% \usepackage{float}
+% \usepackage{algorithm}
+% %\usepackage{algorithmic}
+% \usepackage{algpseudocode}
+% \usepackage{soul}
+% \usepackage{indentfirst}
+% \usepackage{multicol}
+
+
+% %\usepackage{ulem}
+% %%%%%%%%%%% Hack for alphanumeric bibliography
+% \RequirePackage[
+% 			style=alphabetic,%numeric-comp,%authoryear-comp,%
+% 			sorting=nyt,%ynt					
+% 			hyperref=true, %	
+% 			firstinits=true,%
+% 			backend=bibtex,
+% 			natbib=true,
+% 			url=false,
+% 			isbn=false,
+% 			maxnames=2, %for et al to be used
+% 			maxalphanames=1, %to avoid printing a + for every et al in the abbreviation
+% 			doi=false]{biblatex}		
+	
+% \newcommand{\beginCode}[3]{\begin{lstlisting}[caption={{#1}},captionpos=bottom,label={#2},frame=lines,numbers=right]{#3}}
+% \newcommand{\stopCode}{\end{lstlisting}}		
+
+% %Added by Lindsey (issues with asterisk in code otherwise)
+% \renewcommand{\textasteriskcentered}{\ensuremath{*}}
+
+% \addbibresource{Zotero.bib}
+
+%  \defbibheading{myheading}[BIBLIOGRAPHY]{
+%  \chapter*{#1}
+%  %\centerline{\bf{#1}}
+%  \markboth{#1}{#1}}
+
+% %\usepackage{amsmath,amssymb,amsfonts} %amssymb and amsfonts cannot be used in conjunction with mdput
+% %\usepackage{graphicx,subfig}% Include figure files
+% \usepackage{dcolumn}% Align table columns on decimal point
+% \usepackage{bm}% bold math
+% %\usepackage{hyperref}% add hypertext capabilities
+% %\usepackage{hypernat}% make hyperref and natbib work together
+% \usepackage{cancel}
+% \usepackage{verbatim}% multiline commenting
+% \usepackage{ifthen}
+% \usepackage{url}
+% \usepackage{sectsty}
+% \usepackage{balance} 
+% %\usepackage{caption}
+% \usepackage{graphicx} %eps figures can be used instead
+% \usepackage{lastpage}
+% \usepackage[format=plain,justification=RaggedRight,singlelinecheck=false,font=small,labelfont=bf,labelsep=space]{caption} 
+% \usepackage{fancyhdr}
+% \pagestyle{fancy}
+
+% %http://tex.stackexchange.com/questions/100817/error-when-using-bc-from-abbrevs-in-caption
+% %Getting BC
+% \usepackage{abbrevs}
+% \usepackage{etoolbox}
+
+% \usepackage{units} %Needed to solve bug from citation Hydrodynamics in 21/2 dimensions
+% %see http://www.latex-community.org/viewtopic.php?f=5&t=989
+
+% \usepackage[sharp]{easylist} %used for brainstorming purposes 
+% %============================================================================
+% % Adding packages from else-where to here..
+
+% \usepackage[parfill]{parskip}              
+
+% \usepackage[table]{xcolor}
+% \usepackage{array,booktabs}
+% \usepackage{colortbl}
+% \usepackage{pdflscape}
+% \usepackage{tikz}
+% \usepackage{placeins}
+% \usepackage{titlesec}
+% \usepackage{color}
+% \usepackage{calc}
+% %============================================================================
+% % for emptying pages on list of figures and tables
+% \makeatletter
+% \newcommand{\emptypage}[1]{%
+%   \cleardoublepage
+%   \begingroup
+%   \let\ps@plain\ps@empty
+%   \pagestyle{empty}
+%   #1
+%   \cleardoublepage}
+% \makeatletter
+% %============================================================================
+
+
+% \robustify{\DateMark} % after having loaded abbrevs
+
+% \newcolumntype{L}{@{}>{\kern\tabcolsep}l<{\kern\tabcolsep}}
+
+
+% \setcounter{secnumdepth}{4}
+
+% \titleformat{\paragraph}
+% {\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+% \titlespacing*{\paragraph}
+% {0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% \dispositionformat{\bfseries}            % bold and serif
+
+% \headingformat{\large\MakeUppercase}   % All letters uppercase
+% \frenchspacing
+
+
+% \include{optional}
+% \setlength{\headheight}{14pt}
+
+% %%---------------------------- Content Options -------------------------------%%
+% \committeesize{3}
+
+% \chair{Mark Hills, PhD.}
+% \memberI{Nasseh Tabrizi, PhD.}
+% \memberII{Junhua Ding, PhD.}
+
+% \student{Lindsey}{Lanier} % a full middle name
+% \program{Software Engineering}
+
+% %% Thesis Title
+% \thesistitle{Software Engineering as a Social Process: \\A Study of Research Triangle Park}
+
+% %% Capital letter height
+% % \newlength{\chaptercapitalheight}
+% % \settoheight{\chaptercapitalheight}{D}
+% % \newlength{\chapterfootskip}
+% % \setlength{\chapterfootskip}{\chaptercapitalheight}
+% % \addtolength{\chapterfootskip}{2\baselineskip}
+% % \addtolength{\chapterfootskip}{0.5ex}  % A little extra space to ensure there are 2 full double spaced lines
+% % \renewcommand{\listfigurename}{LIST OF FIGURES}
+% % \renewcommand{\listtablename}{LIST OF TABLES}
+% % \renewcommand{\bibname}{BIBLIOGRAPHY}
+
+% % \newlength\graphht
+% % \newcommand\calculategraphicstargetheight[1]{%
+% %      \setlength\graphht{\textheight 
+% %                        -\parskip
+% %                        -\abovecaptionskip -\belowcaptionskip
+% %                        -(12pt * #1) % assuming baselineskip of 12pt in caption
+% %                        -\chapterfootskip
+% %                        }}
+% % \fancypagestyle{lscapedplain}{%
+% %   \fancyhf{}
+% %   \fancyfoot{%
+% %     \tikz[remember picture,overlay]
+% %       \node[outer sep=1cm,above,rotate=90] at (current page.east) {\thepage};}
+% % \renewcommand{\headrulewidth}{0pt} 
+% % \renewcommand{\footrulewidth}{0pt}
+% % }
+
+% % \setlength\parindent{0pt}
+   
+% \begin{document}
+% \pagestyle{plain}
+% \lstset{language=Java}
+% %%---------------------------------------------------------------------------%%
+% \frontmatter
+
+% \include{front}
+
+% %%---------------------------------------------------------------------------%%
+% \mainmatter
+
+% % \floatstyle{boxed}
+% % \restylefloat{figure}
+% % \addtocontents{toc}{\protect\thispagestyle{empty}}
+
+% % \pagestyle{fancy}
+% % \newgeometry{margin=1in,lmargin=1.25in,footskip=\chapterfootskip, includehead, includefoot}
+% \include{Chapter-1}
+% \include{Chapter-2}
+% \include{Chapter-3}
+% \include{Chapter-4}
+% \include{Chapter-5}
+% \include{Chapter-6}
+% \include{Chapter-7}
+% % \restoregeometry
+
+
+% %%---------------------------------------------------------------------------%%
+% %%  Bibliography 
+
+% %--
+% % \begin{spacing}{1}
+% %  \setlength\bibitemsep{11pt} %22pt = 2*11pt, where fontsize is 11pt
+% %  \addcontentsline{toc}{chapter}{{\uppercase{\bibname}}} 
+% % %{\chaptertitlename\ \thechapter}{11pt}{\bf\filcenter}
+% % \titlespacing*{\chapter}{0pt}{-0.5in-9pt}{22pt}
+% % \renewcommand{\bibsetup}{\thispagestyle{empty}}
+% % \printbibliography[heading=myheading]
+% % \end{spacing}
+
+
+
+% % %%---------------------------------------------------------------------------%%
+% % % Appendices
+% % \restoregeometry
+% % \appendix
+% % %\renewcommand\thechapter{}
+% % %\renewcommand\thesection{\arabic{section}}
+
+% % \newgeometry{margin=1in,lmargin=1.25in,footskip=\chapterfootskip, includehead, includefoot}
+
+
+% % %\include{Appendix-A/Appendix-A}
+
+% % \restoregeometry
+
+% %%---------------------------------------------------------------------------%%
+% \backmatter
+
+
+% \end{document}

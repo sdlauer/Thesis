@@ -1,0 +1,70 @@
+% !TEX root = main.tex
+\chapter{GitHub and The GHTorrent Project}
+\label{Chapter:Background}
+
+In this chapter, we will give an overview of GitHub as a platform as well as the GHTorrent project and it's associated data source. GitHub and GHTorrent provide data which is the foundation to the research performed in this thesis.
+
+\section{GitHub}
+\label{sec-GitHub}
+GitHub is a web-based platform used for version control and collaboration between developers. Users can choose to utilize standard Git commands in a terminal to manage their code on GitHub or use the GitHub graphical user interface (GUI) and associated features on GitHub.com. As of February 2016, there were 12 million people collaborating across 31 million repositories on GitHub \cite{_github_2016}. Users wanting to create a GitHub account for their projects have two options, public (free) and private (paid). Public repositories are heavily used by open-source teams to allow for code storage and collaboration from users all over the world. GitHub gives users the option to create "organizations" to more easily manage teams. Organizations allow teams to group one or more projects under one umbrella. Multiple owners can be mapped to organizations for settings and permissions management. 
+
+This research pulls data on GitHub's source code management features with a focus on mining RTP specific statistics as well as looking into the involvement that RTP users have in the social networking aspect of the platform. Source code packages hosted on GitHub are referred to as repositories. We utilize the GHTorrent Project \cite{gousios_ghtorent_2013} for data collection of RTP specific (public) repositories. Public repositories can be browsed and contributed to by not only the owner but anyone else interested in downloading a local copy. Changes by GitHub users can be submitted to the repository owner for review in the form of a "pull request". Changes are saved to repositories through what are known as "commits". There are various workflows that could be implemented for GitHub projects. One popular option is to utilize "forking" and "pull requests". A "fork" is a clone of a repository, saved as a new repository on one's own GitHub account. Users might implement their own enhancement to the cloned application, or could also work on an associated "issue". One or more commits can be pushed to this clone. Once the developer is finished with their changes, they can then submit a "pull request" to the original repository owner for review. If the repository owner is happy with the changes, they can merge the "pull request" into a branch on the original repository. This is the main workflow that we focus on throughout this research.
+
+During the data collection phase of this research, we noted some important details about commits which were unexpected. The author for any given commit is the user who wrote the code to be committed, the committer is the user who pushed this code into the main software repository. Git allows users to commit on behalf of another person, hence the commit can be pushed by someone who did not author it. Depending on the workflow used to commit the code change, the author/committer information can vary. For example, if a user commits a code change through the command line on their local machine they can include author and committer information as free text form (not ideal if they spell their e-mail address wrong). GitHub has a large knowledge base which documents its various features, including a help article which explains this commit information further \cite{_why_????}.
+
+There are also many useful social networking features available on GitHub. GitHub allows users to follow friends and track what they are working on. Users can also follow particular repositories and see associated updates, also known as "stargazing". GitHub also provides an interface which shows which repositories are trending at any given time, and which can be sorted by programming language.
+
+\section{The GHTorrent Project}
+\label{sec-GHTorrentProject}
+GHTorrent was created for the software research community, a place to easily come to query specific sets of open source repository data without having to go through the GitHub REST API directly. GHTorrent has a relational database (MySQL) which stores structured data on users, repositories, commits, etc. GHTorrent stores the bulk of its data in a MongoDB instance. MongoDB is a type of NoSQL database which utlizes JSON and allows for rapid changes and agile development. MongoDB stores data in the form of JSON documents within what they call "collections". Collections can compare slightly to a relational database's "table" but they are quite different themselves in that they are dynamic, flexible and do not need to have a defined schema. The collections included in GHTorrent's MongoDB instance are outlined in Table \ref{fig:ghtorrent-collections}. MongoDB provides advanced querying operations such as Map-Reduce and aggregation which gives data miners flexibility when conducting their research \cite{_mongodb_????}. GHTorrent chose this technology to be able to more easily manage the large collections of dynamic data as well as accommodate changes to the GitHub schema quickly, among other reasons such as giving the research community flexible options for querying \cite{gousios_ghtorrent:_2012}. 
+
+\begin{table}
+\centering
+\begin{tabular}{|c|c|}
+\hline
+\textbf{Collection name} & \textbf{Github API URL} \\
+\hline
+commit\textunderscore comments & \#{user}/\#{repo}/commits/\#{sha}/comments \\
+\hline
+commits & repos/\#{user}/\#{repo}/commits \\
+\hline
+events & events \\
+\hline
+followers & users/\#{user}/followers \\	
+\hline
+forks & repos/\#{user}/\#{repo}/forks \\	
+\hline
+issues & /repos/\#{owner}/\#{repo}/issues \\	
+\hline
+issue\textunderscore comments & repos/\#{owner}/\#{repo}/issues/comments/\#{comment\textunderscore id} \\
+\hline
+issue\textunderscore events & repos/\#{owner}/\#{repo}/issues/events/\#{event\textunderscore id} \\
+\hline
+org\textunderscore members & orgs/\#{org}/members \\
+\hline
+pull\textunderscore request\textunderscore comments & repos/\#{owner}/\#{repo}/pulls/\#{pullreq\textunderscore id}/comments \\
+\hline
+pull\textunderscore requests & repos/\#{user}/\#{repo}/pulls \\	
+\hline
+repo\textunderscore collaborators & repos/\#{user}/\#{repo}/collaborators \\ 
+\hline
+repo\textunderscore labels & repos/\#{owner}/\#{repo}/issues/\#{issue\textunderscore id}/labels \\
+\hline
+repos & repos/\#{user}/\#{repo} \\
+\hline
+users & users/\#{user} \\
+\hline
+watchers & repos/\#{user}/\#{repo}/stargazers \\
+\hline
+\end{tabular}
+\caption{List of collections available in the GHTorrent MongoDB instance.}
+\label{fig:ghtorrent-collections}
+\end{table}
+
+The GHTorrent project included 4TB of data in their MongoDB instance (as of January 2015) \cite{gousios_ghtorent_2013} but according to more recent updates on their Twitter feed \cite{_ghtorrent_????} (@ghtorrent), it has been constantly growing and aims to pull not only more recent data but to store the entire historical GitHub data source. Their Twitter feed  (@ghtorrent) keeps the community up to date with regular posts, most recently noting that Microsoft has agreed to sponsor the project on Azure for the next 2 years. GHTorrent's users collection was recently geocoded using OpenStreetMap (OSM) data and interestingly, the code for geocoding was provided by a local RTP contributor (GitHub Login: DerekTBrown). This particular feature was extremely helpful for our research in that we could query users based off their geocoded city or state instead of parsing the free text location field ourselves.
+
+As documented in \cite{gousios_ghtorrent:_2012} – which was written during the initial stages of GHTorrent's development (2012), there are several challenges that researchers would face if they decided to use the GitHub REST API directly, challenges that the GHTorrent project has overcome through their provided data source. One of the main challenges is that the GitHub data source is massive. Unless you know exactly what you are looking for and where to look for it, it may take days to search through the collections given the 5000 request/hour limit per API key. The GHTorrent project has done the heavy lifting for us by reverse engineering and documenting the GitHub schema and REST API. Having that information readily available saves researchers much time from having to do this themselves.
+
+In order to overcome the 5000 request/hour limit per API key, GHTorrent designed their workflow to be distributed, with the research community donating SSH keys to allow for extra workers and concurrency across a cluster of machines. SSH keys can be donated by members of the GitHub community \footnote{We donated SSH keys to enable this.}.  GHTorrent uses the REST API \cite{_github_????} (Events Stream) to collect static repository information as well as other events such as associating commits with users and repositories. They have a messaging layer (RabbitMQ) which sits between the events stream and aids with pushing out further requests to the API from there. A single event can ultimately lead to many downstream requests to gather more information from other parts of the REST API. GitHub's event stream is constantly flowing with new information as users are working inside projects. For example, each commit fires off a number of creation requests to other parts of the overall schema. A documented limitation for this is that the event stream handles all additive actions but does not report deletions.  \cite{gousios_ghtorent_2013}
+
+As with all large scale projects, there are challenges and limitations documented for GHTorrent. As highlighted in the previous section, it is possible for the author and the committer to be two different people and there can sometimes be issues with the mapped user credentials when commits are pushed via the command line (free text is allowed). If GHTorrent is unable to map the user to a commit, it creates a fake user entry until the next request is created when it will attempt to resolve the fake entry. As of 2013, there were several thousand fake users in the data source. Another potential problem with the quality of the data is staying on track of any regular updates to the GitHub schema itself. As GitHub makes changes to its overall schema, the GHTorrent project has to closely monitor in case any changes are required to its processes. Another potential problem with the quality of this data source is that there are known periods of missing data from the event stream due to an error in a couple of the GHTorrent scripts---these periods include a few days in March 2012 and mid-October through mid-November 2012. \cite{gousios_ghtorent_2013} 
